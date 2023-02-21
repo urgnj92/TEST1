@@ -16,6 +16,9 @@
 
                     You are logged in!
                 </div>
+
+                <button type="button" onclick = "history.back()">戻る</button>
+
             </div>
         </div>
     </div>

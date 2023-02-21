@@ -11,6 +11,9 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductsController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,3 +21,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/products','ProductsController@index')->name('products.index');
