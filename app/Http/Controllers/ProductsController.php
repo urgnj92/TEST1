@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models\Products;
+use App\Models\Products;
+use App\Models\Company;
 
 class ProductsController extends Controller
 {
@@ -14,7 +15,10 @@ class ProductsController extends Controller
      */
     public function index(Request $request)
     {
-        return view('products.index');
+        
+        $products = Products::latest()->paginate(5);
+        return view('products.index',compact('products'))
+        ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +28,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $companies = Company::all();
+        return view('create')
+        ->with('companies',$companies);
     }
 
     /**
@@ -35,7 +41,9 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $products = Products::all();
+        return view('store')
+        ->with('products',$products);
     }
 
     /**
@@ -46,7 +54,9 @@ class ProductsController extends Controller
      */
     public function show(Products $Products)
     {
-        //
+        $products = Products::all();
+        return view('show', compact('products'))
+        ->with('products', $products);
     }
 
     /**
@@ -55,9 +65,9 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Products $Product)
+    public function edit(Products $Products)
     {
-        //
+        return view('edit');
     }
 
     /**
@@ -67,7 +77,7 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Products $Product)
+    public function update(Request $request, Products $Products)
     {
         //
     }
@@ -78,8 +88,11 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Products $Product)
+    public function destroy(Request $request)
     {
-        //
+        $input = $request->all();
+        Products::destroy($input["id"]);
+        return redirect() -> route('products.index')
+        -> with('success','商品を削除しました');
     }
 }
