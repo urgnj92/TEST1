@@ -27,19 +27,16 @@
             </tbody>
         </table>
 
-
-    
-    
         @endforeach
 
         <div class = "col-12 mb-2 mt-2">
-            <button type = "button" class = "btn btn-primary w-100" onclick="location.href=('products/edit') ">{{ __('編集') }}</button>
+            <button type = "button" class = "btn btn-primary w-100" onclick="location.href='edit'">{{ __('編集') }}</button>
         </div>
 
 
         </div>
         <div class = "col-12 mb-2 mt-2">
-            <button type = "button" onclick = "history.back()">{{ __('戻る') }}</button>
+            <button type = "button" onclick="history.back()">{{ __('戻る') }}</button>
         </div>
 
 

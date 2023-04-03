@@ -25,16 +25,17 @@
             </div>
         </div>
 <!-- 選択肢にcompaniesTableのメーカー名を -->
+
         <div class="col-12 mb-2 mt-2">
             <div class="form-group">
                 <select name="companies" class="form-select">
-                    <option>メーカー名を選択してください</option>
+                <option>メーカー名を選択してください</option>
 
-            @foreach ($companies as $company)
+                @foreach ($companies as $company)
+                
+                    <option value="company_name">{{ $company->company_name }}</option>
 
-                <option value="{{ $company->company_name }}">{{ $company->str }}</option>
-
-            @endforeach
+                @endforeach
                 </select>
             </div>
         </div>

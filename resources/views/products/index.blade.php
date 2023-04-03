@@ -20,7 +20,7 @@
 
             @foreach ($companies as $company)
 
-                <option value="{{ $company->company_name }}">{{ $company->str }}</option>
+                <option value="company_name">{{ $company->company_name }}</option>
 
             @endforeach
                 </select>
