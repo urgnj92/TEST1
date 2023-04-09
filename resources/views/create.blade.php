@@ -24,8 +24,7 @@
                 <input type="text" name="name" class="form-control" placeholder="商品名">
             </div>
         </div>
-<!-- 選択肢にcompaniesTableのメーカー名を -->
-
+        
         <div class="col-12 mb-2 mt-2">
             <div class="form-group">
                 <select name="companies" class="form-select">
@@ -74,5 +73,7 @@
         </div>
 </form>
 </div>
+
+
 
 @endsection

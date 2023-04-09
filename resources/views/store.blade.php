@@ -14,7 +14,7 @@
     </div>
 
 <div class="text-left">
-<form action="{{ route('products.store') }}" method="POST">
+<form action="{{ route('products.index') }}" method="POST">
 
     @csrf
 
@@ -25,7 +25,7 @@
                 <input type = "text" name = "name" class = "form-control" placeholder = "商品名">
             </div>
         </div>
-        <!-- 選択肢にメーカー名を入れる -->
+
         <div class="col-12 mb-2 mt-2">
             <div class="form-group">
                 <select name="companies" class="form-select">
@@ -33,7 +33,7 @@
 
             @foreach ($companies as $company)
 
-                <option value="{{ $company->company_name }}">{{ $company->str }}</option>
+            <option value="company_name">{{ $company->company_name }}</option>
 
             @endforeach
                 </select>

@@ -41,9 +41,12 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $products = Products::all();
-        return view('store')
-        ->with('products',$products);
+
+        $input = $request->all();
+        Products::create($input);
+        return redirect()->route('products.index')
+        ->with('success','商品を登録しました');
+
     }
 
     /**
@@ -67,7 +70,10 @@ class ProductsController extends Controller
      */
     public function edit(Products $Products)
     {
-        return view('edit');
+        $companies = Company::all();
+        $products = Products::all();
+        return view('edit',compact('products'))
+        ->with('companies',$companies,'produts',$products);
     }
 
     /**

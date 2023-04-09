@@ -9,9 +9,9 @@
         <div class="text-left">
             <h1>商品情報検索</h1>
         </div>
+
     <input type="text" name="name" class="form-control" placeholder="商品名">
 
-    <!-- companiesテーブルに登録されている企業から選択できるようにする -->
 
     <div class="col-12 mb-2 mt-2">
             <div class="form-group">
@@ -64,7 +64,8 @@
 
     <tbody>
         <tr>
-        <form method="POST" action="{{route('products.destroy')}}">
+        <form action="{{route('products.index')}}" method="POST">
+        <form action="{{route('products.destroy')}}" method="POST">
             <td>{{ $product->id }}</td>
             <td>{{ $product->img_path }}</td>
             <td>{{ $product->product_name }}</td>
