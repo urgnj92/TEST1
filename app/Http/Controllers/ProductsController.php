@@ -16,9 +16,9 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
         $companies = Company::all();
-        $products = Products::latest()->paginate(5);
+        $products = Products::latest()->paginate(10);
         return view('products.index',compact('products'))
-        ->with('companies', $companies, 'products',$products);
+        ->with('companies',$companies, 'products',$products);
     }
 
     /**
@@ -41,7 +41,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-
+        $companies = Company::all();
         $input = $request->all();
         Products::create($input);
         return redirect()->route('products.index')

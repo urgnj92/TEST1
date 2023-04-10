@@ -15,12 +15,12 @@
 
     <div class="col-12 mb-2 mt-2">
             <div class="form-group">
-                <select name="companies" class="form-select">
+                <select name="company_name" class="form-select">
                     <option>メーカー名を選択してください</option>
 
             @foreach ($companies as $company)
 
-                <option value="company_name">{{ $company->company_name }}</option>
+                <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
 
             @endforeach
                 </select>
@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <table class = "table">
+    <table class="table">
     <thread>
         <tr>
             <th>ID</th>
@@ -64,8 +64,8 @@
 
     <tbody>
         <tr>
-        <form action="{{route('products.index')}}" method="POST">
-        <form action="{{route('products.destroy')}}" method="POST">
+        <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+
             <td>{{ $product->id }}</td>
             <td>{{ $product->img_path }}</td>
             <td>{{ $product->product_name }}</td>
@@ -76,19 +76,20 @@
             {{ __('詳細表示') }}</button></td>
             <td>
             
-            
             @csrf
 
             <input type="hidden" name="id" value="{{$product->id}}">
-
-            <button type="submit" class="btn btn-sm btn-danger" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button></td>
+            <button type="submit" class="btn btn-sm btn-danger" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button>
         </form>
+        </form>
+        </td>
         </tr>
     </tbody>
     
         @endforeach
 
     </table>
+
 
 @endsection
 

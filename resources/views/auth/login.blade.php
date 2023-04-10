@@ -43,7 +43,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary" onclick="location.href=('products')">
+                                <button type="submit" class="btn btn-primary" onclick="location.href=('products.index')">
                                     {{ __('ログイン') }}
                                 </button>
 
@@ -52,7 +52,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type = "button" class = "btn btn-primary w-100" onclick = "location.href = ('register') ">
+                                <button type="button" class="btn btn-primary w-100" onclick="location.href = ('register') ">
                                     {{ __('新規登録') }}
                                 </button>
 

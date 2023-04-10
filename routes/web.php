@@ -34,6 +34,6 @@ Route::post('/products/store/','ProductsController@store')->name('products.store
 // 商品情報詳細画面
 Route::get('/products/show/','ProductsController@show')->name('products.show');
 // 商品情報編集画面
-Route::get('/products/edit/','ProductsController@edit')->name('products.edit');
-Route::put('/products/edit/','ProouctsController@update')->name('products.update');
+Route::get('/products/edit/{product}','ProductsController@edit')->name('products.edit');
+Route::put('/products/edit/{product}','ProouctsController@update')->name('products.update');
 
