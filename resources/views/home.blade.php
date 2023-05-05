@@ -17,8 +17,14 @@
                     You are logged in!
                 </div>
 
-                <button type="button" onclick = "history.back()">戻る</button>
 
+                <div>
+                    <button type="button" onclick="location.href=('products/index')">{{ __('商品情報一覧') }}</button>
+                </div>
+                <div>
+                    <button type="button" onclick="history.back()">{{ __('戻る') }}</button>
+                </div>
+                
             </div>
         </div>
     </div>

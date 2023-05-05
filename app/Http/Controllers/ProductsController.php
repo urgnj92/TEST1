@@ -16,9 +16,23 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
         $companies = Company::all();
-        $products = Products::latest()->paginate(10);
+        $products = Products::oldest()->paginate(5);       
         return view('products.index',compact('products'))
         ->with('companies',$companies, 'products',$products);
+
+        // $keyword = $request->input('keyword');
+        // $query = User::query();
+        // if(!empty($products))
+        // {
+        //     $query->where('keyword','like','%'.$keyword.'%');
+        // }
+
+        // $data = $query->orderBy('created_at')->pagenate(5);
+        // return view('products.index')
+        // ->with('data',$data)
+        // ->with('keyword', $keyword);
+
+
     }
 
     /**
@@ -58,8 +72,8 @@ class ProductsController extends Controller
     public function show(Products $Products)
     {
         $products = Products::all();
-        return view('show', compact('products'))
-        ->with('products', $products);
+        return view('show',compact('products'))
+        ->with('products',$products);
     }
 
     /**
@@ -73,7 +87,8 @@ class ProductsController extends Controller
         $companies = Company::all();
         $products = Products::all();
         return view('edit',compact('products'))
-        ->with('companies',$companies,'produts',$products);
+        ->with('companies',$companies)
+        ->with('products',$products);
     }
 
     /**
@@ -85,7 +100,19 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Products $Products)
     {
-        //
+        $products->product_id = $request->input(["product_id"]);
+        $products->company_name = $request->input(["company_name"]);
+        $products->product_name = $request->input(["product_name"]);
+        $products->price = $request->input(["price"]);
+        $products->stock = $request->input(["stock"]);
+        $products->comment = $request->input(["comment"]);
+        $products->img_path = $request->input(["img_path"]);
+        $products->save();
+
+        return redirect()->route('products.index')
+        ->with('success','商品情報を変更しました');
+
+
     }
 
     /**

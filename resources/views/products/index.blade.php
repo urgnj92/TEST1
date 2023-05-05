@@ -9,29 +9,36 @@
         <div class="text-left">
             <h1>商品情報検索</h1>
         </div>
-
-    <input type="text" name="name" class="form-control" placeholder="商品名">
-
-
-    <div class="col-12 mb-2 mt-2">
+<!-- 商品名の部分一致を行い、商品検索できるようにし、検索結果を表示する -->     
+        <div class="col-12 mb-2 mt-2">
             <div class="form-group">
-                <select name="company_name" class="form-select">
-                    <option>メーカー名を選択してください</option>
 
-            @foreach ($companies as $company)
+            <form action="{{ route('products.index') }}" method="GET">
+                <input type="search" name="keyword"  class="form-control" value= "" placeholder="商品名を入力してください">
+
+            </div>
+
+            <div>
+                <select name="company_name" class="form-select">
+                    <option>{{ __('メーカー名を選択してください') }}</option>
+
+                @foreach ($companies as $company)
 
                 <option value="{{ $company->company_name }}">{{ $company->company_name }}</option>
 
-            @endforeach
+                @endforeach
+
                 </select>
             </div>
 
-    </div>
-
-    <div class="text-right">
-        <button type="submit" class="btn btn-primary w-100" >検索</button>
-    </div>
+                <button type="submit" class="btn btn-primary" >{{ __('検索') }}</button>
+                
+            </form>
+        </div>
 </div>
+
+
+
 
     <div class="container">
         <div class="col-log-12">
@@ -39,10 +46,8 @@
                 <h2>商品情報一覧</h2>
             </div>
 
-            <div class="text-right">
-                <button type="button" class="btn btn-primary w-100" onclick="location.href=('products/create')">
+                <button type="button" class="btn btn-primary" onclick="location.href=('create')">
                 {{ __('新規登録') }}</button>
-            </div>
         </div>
     </div>
 
@@ -60,7 +65,7 @@
         </tr>
     </thread>
     
-        @foreach ($products as $product)
+    @foreach ($products as $product)
 
     <tbody>
         <tr>
@@ -72,15 +77,14 @@
             <td>{{ $product->price }}</td>
             <td>{{ $product->stock }}</td>
             <td>{{ $product->company_name }}</td>
-            <td><button type="button" class="btn btn-primary w-100" onclick="location.href=('products/show') ">
+            
+            <!-- 詳細表示ボタンを押して商品ごとの詳細情報を表示 選択した商品IDへ飛ぶが404エラーが出る -->
+            <td><button type="button" class="btn btn-primary" onclick="location.href='{{ route('products.show', $product->id) }}'">
             {{ __('詳細表示') }}</button></td>
             <td>
-            
             @csrf
-
             <input type="hidden" name="id" value="{{$product->id}}">
             <button type="submit" class="btn btn-sm btn-danger" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button>
-        </form>
         </form>
         </td>
         </tr>
