@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Company;
+use App\Http\Requests\ProductsRequest;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -15,24 +17,24 @@ class ProductsController extends Controller
      */
     public function index(Request $request)
     {
-        $companies = Company::all();
-        $products = Products::oldest()->paginate(5);       
-        return view('products.index',compact('products'))
-        ->with('companies',$companies, 'products',$products);
+        $keyword = $request->input('keyword');
+        $query = Products::query();
 
-        // $keyword = $request->input('keyword');
-        // $query = User::query();
-        // if(!empty($products))
-        // {
-        //     $query->where('keyword','like','%'.$keyword.'%');
-        // }
-
-        // $data = $query->orderBy('created_at')->pagenate(5);
-        // return view('products.index')
-        // ->with('data',$data)
-        // ->with('keyword', $keyword);
-
-
+        $query -> join('companies', 'company_id', '=', 'companies.id')
+        ->select('products.*','companies.company_name')
+        ->where('products.product_name', 'LIKE', "%$keyword%")
+        ->orwhere('companies.company_name', 'LIKE', "%$keyword%")
+        ->get();
+        
+        $products = $query->get();
+        return view('products.index', compact('products', 'keyword'));
+        
+        // $companies = Company::all();
+        // $products = Products::oldest()->paginate(10);
+        // // $companies = DB::table('companies');
+        // return view('products.index',compact('products'))
+        // ->with('companies', '$companies', 'products',$products);
+    
     }
 
     /**
@@ -40,11 +42,17 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         $companies = Company::all();
         return view('create')
         ->with('companies',$companies);
+
+        // $model = new Company();
+        // $companies = $model -> getCompanyNameById();
+
+        // return view('create', compact('companies'));
     }
 
     /**
@@ -58,9 +66,20 @@ class ProductsController extends Controller
         $companies = Company::all();
         $input = $request->all();
         Products::create($input);
-        return redirect()->route('products.index')
-        ->with('success','商品を登録しました');
+        return redirect()->route('products.index');
 
+        // DB::beginTransaction();
+
+        // try {
+        //      $model = new Products();
+        //      $model->registProduct($request);
+        //      DB::commit();
+        //     } catch (\Exception $e){
+        //      DB::rollback();
+        //      return back();
+        //     }
+
+        //  return redirect()->route('index');
     }
 
     /**
@@ -87,8 +106,7 @@ class ProductsController extends Controller
         $companies = Company::all();
         $products = Products::all();
         return view('edit',compact('products'))
-        ->with('companies',$companies)
-        ->with('products',$products);
+        ->with('companies',$companies, 'products',$products);
     }
 
     /**
@@ -109,10 +127,8 @@ class ProductsController extends Controller
         $products->img_path = $request->input(["img_path"]);
         $products->save();
 
-        return redirect()->route('products.index')
+        return redirect()->route('index')
         ->with('success','商品情報を変更しました');
-
-
     }
 
     /**

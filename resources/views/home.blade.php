@@ -14,13 +14,10 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <a href='index'>You are logged in!</a>
                 </div>
 
 
-                <div>
-                    <button type="button" onclick="location.href=('products/index')">{{ __('商品情報一覧') }}</button>
-                </div>
                 <div>
                     <button type="button" onclick="history.back()">{{ __('戻る') }}</button>
                 </div>

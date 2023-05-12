@@ -13,7 +13,7 @@ class ProductsTableSeeder extends Seeder
     {
         \DB::table('products')->insert([
             [
-                'company_name' => '株式会社A' ,
+                'company_id' => '1',
                 'product_name' => 'ミネラルウォーター',
                 'price' => '110' ,
                 'stock' => '25' ,
@@ -24,7 +24,7 @@ class ProductsTableSeeder extends Seeder
             ],
             
             [
-                'company_name' => '株式会社B' ,
+                'company_id' => '2',
                 'product_name' => '緑茶',
                 'price' => '120' ,
                 'stock' => '20' ,
@@ -35,7 +35,7 @@ class ProductsTableSeeder extends Seeder
             ],
 
             [
-                'company_name' => '株式会社C' ,
+                'company_id' => '3',
                 'product_name' => '100%オレンジジュース',
                 'price' => '140' ,
                 'stock' => '15' ,
@@ -46,7 +46,7 @@ class ProductsTableSeeder extends Seeder
             ],
 
             [
-                'company_name' => '株式会社D' ,
+                'company_id' => '4',
                 'product_name' => 'ソーダ',
                 'price' => '120' ,
                 'stock' => '12' ,
@@ -57,7 +57,7 @@ class ProductsTableSeeder extends Seeder
             ],
 
             [
-                'company_name' => '株式会社E' ,
+                'company_id' => '5',
                 'product_name' => '紅茶',
                 'price' => '120' ,
                 'stock' => '10' ,

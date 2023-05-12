@@ -1,10 +1,7 @@
 @extends('productsapp')
 
 
-
-
 @section('content')
-<form action="{{ route('products.update') }}" mathod="POST">
     <div class="row">
         <div class="col-log-12">
             <div class="text-left">
@@ -12,17 +9,15 @@
             </div>
         </div>
     </div>
-    
-    @foreach ($products as $product)
-
 
     <div class="col-log-12">
-        <div class="text-left">
+        @foreach ($products as $product)
+        <div class="form-group">
             {{ $product->id }}
         </div>
         
-        <div>
-            {{ $product->img_path }}
+        <div>    
+        {{ $product->img_path }}
         </div>
 
         <div>
@@ -44,23 +39,18 @@
         <div>
             {{ $product->comment }}
         </div>
+        @endforeach
     </div>
 
-    @endforeach
-
-
-    
         <div class="col-12 mb-2 mt-2">
-            <button type="button" class="btn btn-primary w-100" onclick="location.href='edit'">{{ __('編集') }}</button>
+            <button type="button" class="btn btn-primary" onclick="location.href='{{ route('products.edit', $product->id) }}'">{{ __('編集') }}</button>
         </div>
 
 
-        </div>
         <div class="col-12 mb-2 mt-2">
             <button type="button" onclick="history.back()">{{ __('戻る') }}</button>
         </div>
 
-</form>
 
 @endsection
 
