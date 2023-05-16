@@ -15,7 +15,9 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    
+    // 商品情報一覧/検索
+     public function index(Request $request)
     {
         $keyword = $request->input('keyword');
         $query = Products::query();
@@ -43,6 +45,8 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    
+     // 新規登録
     public function create()
     {
         $companies = Company::all();
@@ -54,14 +58,15 @@ class ProductsController extends Controller
 
         // return view('create', compact('companies'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    
+     // 登録処理
+     public function store(Request $request)
     {
         $companies = Company::all();
         $input = $request->all();
@@ -71,15 +76,15 @@ class ProductsController extends Controller
         // DB::beginTransaction();
 
         // try {
-        //      $model = new Products();
-        //      $model->registProduct($request);
-        //      DB::commit();
-        //     } catch (\Exception $e){
-        //      DB::rollback();
-        //      return back();
-        //     }
+        //       $model = new Products();
+        //       $model->registProduct($request);
+        //       DB::commit();
+        //      } catch (\Exception $e){
+        //       DB::rollback();
+        //       return back();
+        //      }
 
-        //  return redirect()->route('index');
+        //   return redirect()->route('index');
     }
 
     /**
@@ -88,12 +93,20 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Products $Products)
-    {
-        $products = Products::all();
-        return view('show',compact('products'))
-        ->with('products',$products);
-    }
+    
+    // 詳細画面表示
+          public function show($id){
+             $model = new Products();
+             $products = $model->getDetail($id);
+            
+             return view('show', compact('products'));
+          }
+    
+        //  public function show(Products $Products){
+        //     $products = Products::all();
+        //     return view('show',compact('products'))
+        //     ->with('products',$products);
+        // }
 
     /**
      * Show the form for editing the specified resource.
@@ -101,12 +114,17 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Products $Products)
-    {
-        $companies = Company::all();
-        $products = Products::all();
-        return view('edit',compact('products'))
-        ->with('companies',$companies, 'products',$products);
+    
+    // 編集画面
+     public function edit($id) {
+            $model = new Products();
+            $products = $model->getDetail($id);
+            return view('edit', compact('products'));
+
+        // $companies = Company::all();
+        // $products = Products::all();
+        // return view('edit',compact('products'))
+        // ->with('companies',$companies, 'products',$products);
     }
 
     /**
@@ -116,20 +134,28 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Products $Products)
-    {
-        $products->product_id = $request->input(["product_id"]);
-        $products->company_name = $request->input(["company_name"]);
-        $products->product_name = $request->input(["product_name"]);
-        $products->price = $request->input(["price"]);
-        $products->stock = $request->input(["stock"]);
-        $products->comment = $request->input(["comment"]);
-        $products->img_path = $request->input(["img_path"]);
-        $products->save();
+    
+    // 商品情報更新
+     public function update(Request $request, $id) {
+        $products = Products::find($id);
+        $products->updateProduct($request, $products);
+        $companies = $products -> getCompanyNameById();
 
-        return redirect()->route('index')
-        ->with('success','商品情報を変更しました');
+        return redirect()->route('products.index', compact('products', 'companies'));
     }
+
+    //     DB::beginTransaction();
+    //      try {
+    //          $model = new Products();
+    //          $model->updateProduct($request, $id);
+    //          DB::commit();
+    //      } catch (\Exception $e) {
+    //          DB::rollback();
+    //          return back();
+    //      }
+    //      return redirect() -> route('products.index');
+    // }
+
 
     /**
      * Remove the specified resource from storage.
@@ -137,11 +163,12 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    
+    // 商品削除
+     public function destroy(Request $request)
     {
         $input = $request->all();
         Products::destroy($input["id"]);
-        return redirect() -> route('products.index')
-        -> with('success','商品を削除しました');
+        return redirect() -> route('products.index');
     }
 }

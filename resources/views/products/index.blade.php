@@ -61,7 +61,6 @@
             <td>{{ $product->created_at }}</td>
             <td>{{ $product->updated_at }}</td>
             <!-- 詳細表示ボタンを押して商品ごとの詳細情報を表示 選択した商品IDへ飛ぶが全部の情報が表示される -->
-            <!-- <form action="{{ route('products.show', $product->id) }}" method="GET"> -->
             <td><button type="button" class="btn btn-primary" onclick="location.href='{{ route('products.show', $product->id) }}'">
             {{ __('詳細') }}</button></td>
             

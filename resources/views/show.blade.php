@@ -11,39 +11,40 @@
     </div>
 
     <div class="col-log-12">
-        @foreach ($products as $product)
+   
         <div class="form-group">
-            {{ $product->id }}
+            {{ $products->id }}
         </div>
         
         <div>    
-        {{ $product->img_path }}
+            {{ $products->img_path }}
         </div>
 
         <div>
-            {{ $product->product_name }}
+            {{ $products->product_name }}
         </div>
 
         <div>
-            {{ $product->company_name }}
+            {{ $products->company_name }}
         </div>
 
         <div>
-            {{ $product->price }}
+            {{ $products->price }}
         </div>
         
         <div>
-            {{ $product->stock }}
+            {{ $products->stock }}
         </div>
 
         <div>
-            {{ $product->comment }}
+            {{ $products->comment }}
         </div>
-        @endforeach
+
+
     </div>
 
         <div class="col-12 mb-2 mt-2">
-            <button type="button" class="btn btn-primary" onclick="location.href='{{ route('products.edit', $product->id) }}'">{{ __('編集') }}</button>
+            <button type="button" class="btn btn-primary" onclick="location.href='{{ route('products.edit', $products->id) }}'">{{ __('編集') }}</button>
         </div>
 
 

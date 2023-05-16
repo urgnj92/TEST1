@@ -18,23 +18,22 @@ Route::get('/', function () {
 Auth::routes();
 
 // ログイン画面
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // 商品情報一覧画面
-Route::get('/index','ProductsController@index')->name('products.index');
-
-// 商品新規登録画面
-// 登録画面
-Route::get('/create','ProductsController@create')->name('products.create');
-// 登録処理
-Route::post('/create','ProductsController@store')->name('products.store');
+Route::get('/index',[App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
 
 // 商品情報削除
-Route::post('/destroy','ProductsController@destroy')->name('products.destroy');
+Route::post('/destroy/{id}',[App\Http\Controllers\ProductsController::class, 'destroy'])->name('products.destroy');
+
+// 商品新規登録画面
+// 登録画面/登録処理
+Route::get('/create',[App\Http\Controllers\ProductsController::class, 'create'])->name('products.create');
+Route::post('/create',[App\Http\Controllers\ProductsController::class, 'store', 'registProduct'])->name('products.store');
 
 // 商品情報詳細画面
-Route::get('/show/{id}','ProductsController@show')->name('products.show');
+Route::get('/show/{id}',[App\Http\Controllers\ProductsController::class, 'show'])->name('products.show');
 
 // 商品情報編集画面
-Route::get('/edit/{id}','ProductsController@edit')->name('products.edit');
-Route::put('/edit/{id}','ProouctsController@update')->name('products.update');
+Route::get('/edit/{id}',[App\Http\Controllers\ProductsController::class, 'edit'])->name('products.edit');
+Route::post('/edit/{id}',[App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
