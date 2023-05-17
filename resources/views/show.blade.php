@@ -2,54 +2,32 @@
 
 
 @section('content')
-    <div class="row">
-        <div class="col-log-12">
-            <div class="text-left">
-                <h1>商品情報詳細</h1>
-            </div>
-        </div>
+    <div class="top">
+        <h1>商品情報詳細</h1>
     </div>
 
-    <div class="col-log-12">
-   
-        <div class="form-group">
-            {{ $products->id }}
-        </div>
+    <div class="main">
+        <div class="products_detail">{{ $products->id }}</div>
         
-        <div>    
-            {{ $products->img_path }}
-        </div>
+        <div class="products_detail">{{ $products->img_path }}</div>
 
-        <div>
-            {{ $products->product_name }}
-        </div>
+        <div class="products_detail">{{ $products->product_name }}</div>
 
-        <div>
-            {{ $products->company_name }}
-        </div>
+        <div class="products_detail">{{ $products->company_name }}</div>
 
-        <div>
-            {{ $products->price }}
-        </div>
+        <div class="products_detail">{{ $products->price }}</div>
         
-        <div>
-            {{ $products->stock }}
-        </div>
+        <div class="products_detail">{{ $products->stock }}</div>
 
-        <div>
-            {{ $products->comment }}
-        </div>
-
-
+        <div class="products_detail">{{ $products->comment }}</div>
     </div>
 
-        <div class="col-12 mb-2 mt-2">
+        <div class="edit">
             <button type="button" class="btn btn-primary" onclick="location.href='{{ route('products.edit', $products->id) }}'">{{ __('編集') }}</button>
         </div>
 
-
-        <div class="col-12 mb-2 mt-2">
-            <button type="button" onclick="history.back()">{{ __('戻る') }}</button>
+        <div class="back">
+            <button type="button" class="btn btn-primary" onclick="history.back()">{{ __('戻る') }}</button>
         </div>
 
 

@@ -17,8 +17,7 @@ class ProductsController extends Controller
      */
     
     // 商品情報一覧/検索
-     public function index(Request $request)
-    {
+    public function index(Request $request) {
         $keyword = $request->input('keyword');
         $query = Products::query();
 
@@ -30,13 +29,6 @@ class ProductsController extends Controller
         
         $products = $query->get();
         return view('products.index', compact('products', 'keyword'));
-        
-        // $companies = Company::all();
-        // $products = Products::oldest()->paginate(10);
-        // // $companies = DB::table('companies');
-        // return view('products.index',compact('products'))
-        // ->with('companies', '$companies', 'products',$products);
-    
     }
 
     /**
@@ -45,19 +37,13 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    
      // 新規登録
-    public function create()
-    {
-        $companies = Company::all();
-        return view('create')
-        ->with('companies',$companies);
-
-        // $model = new Company();
-        // $companies = $model -> getCompanyNameById();
-
-        // return view('create', compact('companies'));
+    public function create() {
+        $model = new Company();
+        $companies = $model -> getCompanyNameById();
+        return view('create', compact('companies'));
     }
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -66,25 +52,11 @@ class ProductsController extends Controller
      */
     
      // 登録処理
-     public function store(Request $request)
-    {
+    public function store(Request $request) {
         $companies = Company::all();
         $input = $request->all();
         Products::create($input);
         return redirect()->route('products.index');
-
-        // DB::beginTransaction();
-
-        // try {
-        //       $model = new Products();
-        //       $model->registProduct($request);
-        //       DB::commit();
-        //      } catch (\Exception $e){
-        //       DB::rollback();
-        //       return back();
-        //      }
-
-        //   return redirect()->route('index');
     }
 
     /**
@@ -95,18 +67,11 @@ class ProductsController extends Controller
      */
     
     // 詳細画面表示
-          public function show($id){
-             $model = new Products();
-             $products = $model->getDetail($id);
-            
-             return view('show', compact('products'));
-          }
-    
-        //  public function show(Products $Products){
-        //     $products = Products::all();
-        //     return view('show',compact('products'))
-        //     ->with('products',$products);
-        // }
+    public function show($id) {
+        $model = new Products();
+        $products = $model->getDetail($id);
+        return view('show', compact('products'));
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -116,15 +81,10 @@ class ProductsController extends Controller
      */
     
     // 編集画面
-     public function edit($id) {
-            $model = new Products();
-            $products = $model->getDetail($id);
-            return view('edit', compact('products'));
-
-        // $companies = Company::all();
-        // $products = Products::all();
-        // return view('edit',compact('products'))
-        // ->with('companies',$companies, 'products',$products);
+    public function edit($id) {
+        $model = new Products();
+        $products = $model->getDetail($id);
+        return view('edit', compact('products'));
     }
 
     /**
@@ -136,25 +96,12 @@ class ProductsController extends Controller
      */
     
     // 商品情報更新
-     public function update(Request $request, $id) {
+    public function update(Request $request, $id) {
         $products = Products::find($id);
         $products->updateProduct($request, $products);
         $companies = $products -> getCompanyNameById();
-
         return redirect()->route('products.index', compact('products', 'companies'));
     }
-
-    //     DB::beginTransaction();
-    //      try {
-    //          $model = new Products();
-    //          $model->updateProduct($request, $id);
-    //          DB::commit();
-    //      } catch (\Exception $e) {
-    //          DB::rollback();
-    //          return back();
-    //      }
-    //      return redirect() -> route('products.index');
-    // }
 
 
     /**
@@ -165,8 +112,7 @@ class ProductsController extends Controller
      */
     
     // 商品削除
-     public function destroy(Request $request)
-    {
+    public function destroy(Request $request) {
         $input = $request->all();
         Products::destroy($input["id"]);
         return redirect() -> route('products.index');

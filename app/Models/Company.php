@@ -25,11 +25,10 @@ class Company extends Model
     public function getCompanyNameById() {
         $companies = DB::table('companies')
         ->get();
-
         return $companies;
     }
 
     public function company() {
-        return $this->belongsTo('App\Models\Company');
+        return $this ->belongsTo('App\Models\Company');
     }
 }
