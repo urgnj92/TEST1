@@ -1,7 +1,7 @@
 @extends('productsapp')
 
 @section('content')
-<div class="top">
+<div class="title">
     <h1>商品情報検索</h1>
 </div>
 
@@ -20,12 +20,12 @@
     </form>
 </div>
 
-    <div class="main"> 
+    <div class="body"> 
         <h2>商品情報一覧</h2>
         <button type="button" class="btn btn-primary" onclick="location.href=('create')">{{ __('新規登録') }}</button>
     </div>
 
-    <table class="table">
+    <table class="products-table">
         <thread>
         <tr>
             <th>ID</th>
@@ -39,34 +39,31 @@
             <th>詳細</th>
             <th>削除</th>
         </tr>
-    </thread>
+        </thread>
 
-    <tbody>
-        @foreach ($products as $product)
-        <tr>
-            <td>{{ $product->id }}</td>
-            <td>{{ $product->img_path }}</td>
-            <td>{{ $product->product_name }}</td>
-            <td>{{ $product->price }}</td>
-            <td>{{ $product->stock }}</td>
-            <td>{{ $product->company_name }}</td>
-            <td>{{ $product->created_at }}</td>
-            <td>{{ $product->updated_at }}</td>
-            <td><button type="button" class="btn btn-primary" onclick="location.href='{{ route('products.show', $product->id) }}'">
-            {{ __('詳細') }}</button></td>
+        <tbody>
+            @foreach ($products as $product)
+            <tr>
+                <td>{{ $product->id }}</td>
+                <td>{{ $product->img_path }}</td>
+                <td>{{ $product->product_name }}</td>
+                <td>{{ $product->price }}</td>
+                <td>{{ $product->stock }}</td>
+                <td>{{ $product->company_name }}</td>
+                <td>{{ $product->created_at }}</td>
+                <td>{{ $product->updated_at }}</td>
+                <td><button type="button" class="btn btn-primary" onclick="location.href='{{ route('products.show', $product->id) }}'">
+                {{ __('詳細') }}</button></td>
             
             <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-            <td>
             @csrf
-                    <input type="hidden" name="id" value="{{$product->id}}">
-                    <button type="submit" class="btn btn-danger" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-    
-        </table>
+                <td><input type="hidden" name="id" value="{{$product->id}}">
+                <button type="submit" class="btn btn-danger" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button></td>
+            </form>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 
 
 @endsection

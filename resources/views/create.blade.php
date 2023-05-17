@@ -1,15 +1,12 @@
 @extends('productsapp')
 
 
-
-
 @section('content')
-
-<div class="top">
+<div class="title">
     <h1>商品新規登録画面</h1>
 </div>
 
-<div class="main">
+<div class="body">
     <form action="{{ route('products.store') }}" method="POST">
 
     @csrf
@@ -23,9 +20,7 @@
             <option>メーカー名を選択してください</option>
 
             @foreach ($companies as $company)
-                
                 <option value="{{ $company->id }}">{{ $company->company_name }}</option>
-
             @endforeach
             </select>
         </div>
@@ -34,7 +29,7 @@
             <input type="text" name="price" placeholder="価格">
         </div>
 
-        <div  class="create_products">
+        <div class="create_products">
             <input type="text" name="stock" placeholder="在庫数">
         </div>
 
@@ -46,14 +41,14 @@
             <input type="file" name="img_path" class="imgform">
         </div>
 
-        <div>
+        <div class="submit-product">
             <button type="submit" class="btn btn-primary">{{ __('登録') }}</button>
         </div>
 
-        <div>
+        <div class="back-to-prev">
             <button type="button" class="btn btn-primary" onclick="history.back()">{{ __('戻る') }}</button>
         </div>
-        
+
     </form>
 </div>
 

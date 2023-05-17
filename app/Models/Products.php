@@ -27,7 +27,7 @@ class Products extends Model
     ];
 
     // 詳細表示
-    public function getDetail($id){
+    public function getDetail($id) {
         $product = DB::table('products')
             ->join('companies', 'company_id', '=', 'companies.id')
             ->select('products.*', 'companies.company_name')
@@ -64,7 +64,7 @@ class Products extends Model
         return $result;
     }
 
-
+    // メーカー名の取得
     public function getCompanyNameById() {
         $companies = DB::table('companies')
         ->get();
