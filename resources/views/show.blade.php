@@ -23,7 +23,7 @@
     </div>
 
         <div class="edit-products">
-            <button type="button" class="btn btn-primary" onclick="location.href='{{ route('products.edit', $products->id) }}'">{{ __('編集') }}</button>
+            <button type="button" class="btn btn-primary" onclick="location.href='{{ route('edit', $products->id) }}'">{{ __('編集') }}</button>
         </div>
 
         <div class="back-to-prev">

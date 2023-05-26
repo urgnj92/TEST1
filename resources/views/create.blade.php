@@ -7,7 +7,7 @@
 </div>
 
 <div class="body">
-    <form action="{{ route('products.store') }}" method="POST">
+    <form action="{{ route('store') }}" method="POST">
 
     @csrf
         

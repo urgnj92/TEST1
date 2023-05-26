@@ -6,10 +6,10 @@
 </div>
 
 <div class="search">
-    <form action="{{ route('products.index') }}" method="GET">
+    <form action="{{ route('index') }}" method="GET">
         <input type="text" name="keyword" id="keyword" value="{{ $keyword }}" placeholder="商品名を入力してください">
 
-    <select class="form-select" name="company_id" id="company_id" value="{{ old('company_id') }}">
+    <select class="form-select" name="company_id" id="company_id" value="{{ ('company_id') }}">
         <option>{{ __('メーカー名を選択してください') }}</option>
         @foreach ($products as $product)
             <option value="{{ $product->id }}">{{ $product->company_name }}</option>
@@ -52,10 +52,10 @@
                 <td>{{ $product->company_name }}</td>
                 <td>{{ $product->created_at }}</td>
                 <td>{{ $product->updated_at }}</td>
-                <td><button type="button" class="btn btn-primary" onclick="location.href='{{ route('products.show', $product->id) }}'">
+                <td><button type="button" class="btn btn-primary" onclick="location.href='{{ route('show', $product->id) }}'">
                 {{ __('詳細') }}</button></td>
             
-            <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+            <form action="{{ route('delete', $product->id) }}" method="POST">
             @csrf
                 <td><input type="hidden" name="id" value="{{$product->id}}">
                 <button type="submit" class="btn btn-danger" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button></td>

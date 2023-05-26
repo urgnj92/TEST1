@@ -38,25 +38,37 @@ class ProductsController extends Controller
      */
 
      // 新規登録
-    public function create() {
-        $model = new Company();
-        $companies = $model -> getCompanyNameById();
-        return view('create', compact('companies'));
+      public function create() {
+            $model = new Company();
+            $company = $model->getCompanyNameById();
+
+            return view('create', ['companies' => $company]);
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    
-     // 登録処理
+
+
+    // 登録処理
     public function store(Request $request) {
-        $companies = Company::all();
-        $input = $request->all();
-        Products::create($input);
-        return redirect()->route('products.index');
+
+        // トランザクション開始
+        DB::beginTransaction();
+        try {
+            // 登録処理呼び出し
+            $model = new Products();
+            $model->registProduct($request);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back();
+        }
+
+        return redirect(route('index'));
     }
 
     /**
@@ -95,14 +107,24 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    // 商品情報更新
-    public function update(Request $request, $id) {
-        $products = Products::find($id);
-        $products->updateProduct($request, $products);
-        $companies = $products -> getCompanyNameById();
-        return redirect()->route('products.index', compact('products', 'companies'));
-    }
 
+    // 商品情報更新
+     public function update(Request $request) {
+
+         // トランザクション開始
+         DB::beginTransaction();
+         try {
+             // 更新処理呼び出し
+             $model = new Products();
+             $model->updateProduct($request);
+             DB::commit();
+         } catch (\Exception $e) {
+             DB::rollback();
+             return back();
+         }
+    
+         return redirect(route('index'));
+     }
 
     /**
      * Remove the specified resource from storage.
@@ -111,10 +133,22 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
     
+
     // 商品削除
-    public function destroy(Request $request) {
-        $input = $request->all();
-        Products::destroy($input["id"]);
-        return redirect() -> route('products.index');
-    }
+     public function delete($id) {
+        
+         // トランザクション開始
+         DB::beginTransaction();
+         try {
+             // 削除処理呼び出し
+             $model = new Products();
+             $product = $model->deleteRecord($id);
+             DB::commit();
+         } catch (\Exception $e) {
+             DB::rollback();
+             return back();
+         }
+    
+         return redirect(route('index'));
+     }
 }

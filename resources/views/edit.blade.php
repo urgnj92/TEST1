@@ -3,7 +3,7 @@
 
 @section('content')
 
-<form action="{{ route('products.update',$products->id) }}" method="POST">
+<form action="{{ route('update',$products->id) }}" method="POST">
 
 @csrf
 
