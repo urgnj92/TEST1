@@ -35,6 +35,16 @@ class Products extends Model
         return $products;
     }
 
+    // 検索処理(追加)
+    public  function searchProducts($keyword) {
+        return self::join('companies', 'company_id', '=', 'companies.id')
+                ->select('products.*','companies.company_name')
+                ->where('products.product_name', 'LIKE', "%$keyword%")
+                ->orWhere('companies.company_name', 'LIKE', "%$keyword%")
+                ->get();
+        }
+
+
     // 登録処理
     public function registProduct($data) {
         DB::table('products') -> insert([
@@ -47,7 +57,7 @@ class Products extends Model
             'created_at' => now(),
             'updated_at' => now(),
         ]); 
-           
+
     }
 
     // 詳細表示

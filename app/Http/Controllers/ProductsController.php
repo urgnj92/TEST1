@@ -16,18 +16,12 @@ class ProductsController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    // 商品情報一覧/検索
-    public function index(Request $request) {
-        $keyword = $request->input('keyword');
-        $query = Products::query();
 
-        $query -> join('companies', 'company_id', '=', 'companies.id')
-        ->select('products.*','companies.company_name')
-        ->where('products.product_name', 'LIKE', "%$keyword%")
-        ->orwhere('companies.company_name', 'LIKE', "%$keyword%")
-        ->get();
-        
-        $products = $query->get();
+     // 商品情報一覧/検索(新しい記載)
+    public function index(Request $request) {
+        $model = new Products;
+        $keyword = $request->input('keyword');
+        $products = $model->searchProducts($keyword);
         return view('products.index', compact('products', 'keyword'));
     }
 
@@ -38,11 +32,10 @@ class ProductsController extends Controller
      */
 
      // 新規登録
-      public function create() {
+    public function create() {
             $model = new Company();
             $company = $model->getCompanyNameById();
-
-            return view('create', ['companies' => $company]);
+            return view('products.create', ['companies' => $company]);
     }
 
     /**
@@ -55,7 +48,6 @@ class ProductsController extends Controller
 
     // 登録処理
     public function store(Request $request) {
-
         // トランザクション開始
         DB::beginTransaction();
         try {
@@ -82,7 +74,7 @@ class ProductsController extends Controller
     public function show($id) {
         $model = new Products();
         $products = $model->getDetail($id);
-        return view('show', compact('products'));
+        return view('products.show', compact('products'));
     }
 
     /**
@@ -96,7 +88,7 @@ class ProductsController extends Controller
     public function edit($id) {
         $model = new Products();
         $products = $model->getDetail($id);
-        return view('edit', compact('products'));
+        return view('products.edit', compact('products'));
     }
 
     /**
@@ -109,22 +101,22 @@ class ProductsController extends Controller
     
 
     // 商品情報更新
-     public function update(Request $request) {
+    public function update(Request $request) {
 
-         // トランザクション開始
-         DB::beginTransaction();
-         try {
+        // トランザクション開始
+        DB::beginTransaction();
+        try {
              // 更新処理呼び出し
-             $model = new Products();
-             $model->updateProduct($request);
-             DB::commit();
-         } catch (\Exception $e) {
-             DB::rollback();
-             return back();
-         }
+            $model = new Products();
+            $model->updateProduct($request);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back();
+        }
     
-         return redirect(route('index'));
-     }
+        return redirect(route('index'));
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -135,20 +127,20 @@ class ProductsController extends Controller
     
 
     // 商品削除
-     public function delete($id) {
+    public function delete($id) {
         
-         // トランザクション開始
-         DB::beginTransaction();
-         try {
-             // 削除処理呼び出し
-             $model = new Products();
-             $product = $model->deleteRecord($id);
-             DB::commit();
-         } catch (\Exception $e) {
-             DB::rollback();
-             return back();
-         }
+        // トランザクション開始
+        DB::beginTransaction();
+        try {
+            // 削除処理呼び出し
+            $model = new Products();
+            $product = $model->deleteRecord($id);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back();
+        }
     
-         return redirect(route('index'));
-     }
+        return redirect(route('index'));
+    }
 }

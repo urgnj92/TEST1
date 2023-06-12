@@ -19,7 +19,7 @@
         <div class="products_detail">
             <input type="text" name="product_name" value="{{ $products->product_name }}" placeholder="商品名">
         </div>
-       
+
         <div class="products_detail">
             <select name="company_id" class="form-select">
                 <option>{{ $products->company_name }}</option>
@@ -33,7 +33,7 @@
         <div class="products_detail">
             <input type="text" name="stock" value="{{ $products->stock }}" placeholder="在庫数">
         </div>
- 
+
         <div class="products_detail">
             <textarea name="comment" value="{{ $products->comment }}" placeholder="コメント">{{ $products->comment }}</textarea>
         </div>
