@@ -135,6 +135,7 @@ return [
     */
 
     'providers' => [
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
 
         /*
          * Laravel Framework Service Providers...

@@ -31,4 +31,14 @@ class Company extends Model
     public function company() {
         return $this ->belongsTo('App\Models\Company');
     }
+
+    // // 削除処理
+    // public function deleteCompany($id) {
+    //     $record = Company::find($id);
+    //     if ($record) {
+    //         $record->delete();
+    //         return true;
+    //     }
+    //     return false;
+    // }
 }

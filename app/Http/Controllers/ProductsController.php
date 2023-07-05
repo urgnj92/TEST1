@@ -17,12 +17,19 @@ class ProductsController extends Controller
      */
     
 
-     // 商品情報一覧/検索(新しい記載)
+     // 商品情報一覧/検索
     public function index(Request $request) {
         $model = new Products;
         $keyword = $request->input('keyword');
-        $products = $model->searchProducts($keyword);
-        return view('products.index', compact('products', 'keyword'));
+        $company_name = $request->input('company_name');
+        $min_price = $request->input('min_price');
+        $max_price = $request->input('max_price');
+        $min_stock = $request->input('min_stock');
+        $max_stock = $request->input('max_stock');
+
+        $products = $model->searchProducts($keyword, $company_name, $min_price, $max_price, $min_stock, $max_stock);
+
+        return view('products.index', compact('products', 'keyword', 'company_name', 'min_price', 'max_price', 'min_stock', 'max_stock', $products));
     }
 
     /**
@@ -133,8 +140,11 @@ class ProductsController extends Controller
         DB::beginTransaction();
         try {
             // 削除処理呼び出し
+            // $model = new Company();
+            // $company = $model->deleteCompanies($id);
             $model = new Products();
             $product = $model->deleteRecord($id);
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
