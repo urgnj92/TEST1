@@ -2,15 +2,10 @@
 
 @section('content')
 
-<!-- <script src="{{ asset('./products.js') }}"></script> -->
-
 
 <div class="title">
     <h1>商品情報検索</h1>
 </div>
-
-<button type="button" class="btn btn-primary" id="test">{{ __('TEST') }}</button>
-
 
 <div class="search">
     
@@ -82,13 +77,15 @@
             <form action="{{ route('delete', $product->id) }}" method="POST">
             @csrf
                 <td><input type="hidden" name="id" value="{{$product->id}}">
-                <button type="submit" class="btn btn-danger" id="delete" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button></td>
+                <button type="submit" class="btn btn-danger" id="delete-button" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button></td>
             </form>
             </tr>
             @endforeach
 
         </tbody>
     </table>
+
+    <button type="button" class="btn btn-primary" id="test">{{ __('TEST') }}</button>
 
     @endsection
 
