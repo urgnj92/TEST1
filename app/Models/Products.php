@@ -131,14 +131,5 @@ class Products extends Model
         return false;
     }
 
-    // 削除処理
-    // public function deleteCompany($id) {
-    //     $record = Companies::find($id);
-    //     if ($record) {
-    //         $record->delete();
-    //         return true;
-    //     }
-    //     return false;
-    // }
 
 }

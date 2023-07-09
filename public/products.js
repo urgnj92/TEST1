@@ -23,13 +23,14 @@ $(document).ready(function() {
 
 // 削除処理
 $(document).ready(function(event){
+    
     $("#delete-button").on('click', function() {
         var deleteConfirm = confirm('削除スタート');
         console.log("start");
 
-        // $.ajaxSetup({
-        //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-        // });
+        $.ajaxSetup({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+        });
 
             var form = $(event.target);
             var id = form.find('button').data('id');
@@ -38,8 +39,9 @@ $(document).ready(function(event){
         $.ajax({
             type: "POST",
             url: url,
-            dataType: 'html'
-
+            dataType: 'html',
+            async: true
+            
             }).done(function(results) {
                 // 通信が成功した時の処理
                 var deleteConfirm = confirm('削除しました');

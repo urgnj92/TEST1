@@ -7,6 +7,7 @@ use App\Models\Products;
 use App\Models\Company;
 use App\Http\Requests\ProductsRequest;
 use Illuminate\Support\Facades\DB;
+use Log;
 
 class ProductsController extends Controller
 {
@@ -135,13 +136,13 @@ class ProductsController extends Controller
 
     // 商品削除
     public function delete($id) {
-        
+    
+        Log::debug($id);
+
         // トランザクション開始
         DB::beginTransaction();
         try {
             // 削除処理呼び出し
-            // $model = new Company();
-            // $company = $model->deleteCompanies($id);
             $model = new Products();
             $product = $model->deleteRecord($id);
 

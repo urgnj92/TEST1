@@ -12,10 +12,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('./app.js') }}" defer></script>
-    <!-- <script src="{{ asset('resources/js/products.js') }}" defer></script> -->
-
-    <!-- <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script> -->
-    <!-- <script src="https://code.jquery.com/jquery-3.7.0.js"></script> -->
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
