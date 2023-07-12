@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Products;
 use App\Models\Company;
 use App\Http\Requests\ProductsRequest;
-use Illuminate\Support\Facades\DB;
-use Log;
 
 class ProductsController extends Controller
 {
@@ -61,7 +60,7 @@ class ProductsController extends Controller
         try {
             // 登録処理呼び出し
             $model = new Products();
-            $model->registProduct($request);
+            $model->getProduct($request);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -136,8 +135,6 @@ class ProductsController extends Controller
 
     // 商品削除
     public function delete($id) {
-    
-        Log::debug($id);
 
         // トランザクション開始
         DB::beginTransaction();

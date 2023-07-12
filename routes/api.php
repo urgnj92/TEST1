@@ -17,5 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('Sales','API\VerController@index');
+Route::get('/sales',[App\Http\Controllers\API\SalesController::class, 'store']);
 

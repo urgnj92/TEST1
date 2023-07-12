@@ -6,13 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Kyslik\ColumnSortable\Sortable;
-use App\Models\Company;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 
 
 class Products extends Model
 {
+    use HasFactory;
     use Sortable;
+    
 
     protected $table = 'products';
     protected $primaryKey = 'id';
@@ -54,7 +57,6 @@ class Products extends Model
         $products = Products::sortable('products')
                 ->join('companies', 'company_id', '=', 'companies.id')
                 ->select('products.*','companies.company_name', 'products.price', 'products.stock')
-        // company nameで検索できるようにする（？）
 
                 ->where(function ($query) use ($keyword) {
                     $query->where('products.product_name', 'LIKE', "%$keyword%")
@@ -83,7 +85,7 @@ class Products extends Model
 
 
     // 登録処理
-    public function registProduct($data) {
+    public function getProduct($data) {
         DB::table('products') -> insert([
             'company_id' => $data -> company_id,
             'product_name' => $data -> product_name,
