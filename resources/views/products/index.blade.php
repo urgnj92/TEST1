@@ -54,6 +54,8 @@
             <th scope="col">@sortablelink('stock','在庫数')</th>
             <th scope="col">@sortablelink('company_name','メーカー名')</th>
             <th scope="col">@sortablelink('created_at','作成日')</th>
+            <th scope="col">@sortablelink('updated_at','更新日')</th>
+
             <th>詳細</th>
             <th>削除</th>
         </tr>
