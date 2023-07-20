@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use IlluminateSupport\Facades\DB;
+use Illuminate\Support\Facades\DB;
 use App\Models\Sales;
 
 class SalesController extends Controller
@@ -42,12 +42,12 @@ class SalesController extends Controller
             $stock = $sales->getStock($productId);
 
             if ($stock === 0) {
-                return response()->json(['error' => '在庫がありません'], 400);
+                return response()->json(['error' => '在庫がありません'], 300);
             }
             // 購入処理
-            $ales->buy($productId);
+            $sales->buy($productId);
             // データ追加処理
-            $sales->add($productID);
+            $sales->add($productId);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -58,37 +58,3 @@ class SalesController extends Controller
     }
 
     }
-
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, $id)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     //
-    // }

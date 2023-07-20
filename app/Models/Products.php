@@ -46,11 +46,11 @@ class Products extends Model
 
     // メーカー名の取得
     public function getCompanyNameById() {
-        $companies = DB::table('products')
-            ->join('companies', 'products.company_id', '=', 'companies.id')
-            ->get();
-        return $companies;
+        // companiesテーブルからデータを取得
+        $products = DB::table('companies')->get();
+        return $products;
     }
+
 
     // 検索処理
     public function searchProducts($keyword, $company_name, $min_price, $max_price, $min_stock, $max_stock) {
@@ -101,18 +101,18 @@ class Products extends Model
 
     // 詳細表示
     public function getDetail($id) {
-        $product = DB::table('products')
-            ->join('companies', 'company_id', '=', 'companies.id')
+        $products = DB::table('products')
+            ->join('companies', 'products.company_id', '=', 'companies.id')
             ->select('products.*', 'companies.company_name')
             ->where('products.id', '=', $id)
             ->first();
-        return $product;
+        return $products;
     }
 
     // 更新処理
     public function updateProduct($request) {
-        $product = Products::find($request->id);
-        $product -> fill([
+        $products = Products::find($request->id);
+        $products -> fill([
             'product_name' => $request -> product_name,
             'price' => $request -> price,
             'stock' => $request -> stock,
@@ -120,7 +120,7 @@ class Products extends Model
             'img_path' => $request -> img_path,
             'updated_at' => now(),
         ])->save();  
-        return $product;
+        return $products;
     }
 
     // 削除処理
@@ -133,5 +133,24 @@ class Products extends Model
         return false;
     }
 
+    
 
+
+}
+
+class Company extends Model
+{
+
+    use HasFactory;
+
+    protected $table = 'companies';
+
+    protected $fillable = [
+        'id',
+        'company_name',
+        'street_address',
+        'representative_name',
+        'created_at',
+        'updated_at',
+    ];
 }

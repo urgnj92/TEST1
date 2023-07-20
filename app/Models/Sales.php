@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\DB;
 
 class Sales extends Model
 {
+
+    use HasFactory;
+
     protected $table = 'Sales';
     protected $dates = ['created_at', 'updated_at'];
     protected $fillable = ['id', 'product_id'];
@@ -20,7 +23,7 @@ class Sales extends Model
             ->where('id', $id)
             ->value('stock');
 
-        return $stock;
+        return (int)$stock;
     }
 
     // 購入処理
@@ -34,7 +37,7 @@ class Sales extends Model
 
     // データ追加処理
     public function add($id) {
-        DB:table('sales')->insert([
+        DB::table('sales')->insert([
             'product_id' => $id,
             'created_at' => now(),
             'updated_at' => now()
