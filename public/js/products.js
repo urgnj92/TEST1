@@ -1,19 +1,19 @@
 // 検索処理
 $(document).ready(function() {
     $("#search").on('click', function(event) {
-
         event.preventDefault();
-        // 入力値の取得
-        var keyword = $('#keyword').val();
-        var company_id = $('#company_id').val();
-        var min_price = $('#min_price').val();
-        var max_price = $('#max_price').val();
-        var min_stock = $('#min_stock').val();
-        var max_stock = $('#max_stock').val();
-
+        
         $.ajaxSetup({
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
         });
+
+            // 入力値の取得
+            var keyword = $('#keyword').val();
+            var company_id = $('#company_id').val();
+            var min_price = $('#min_price').val();
+            var max_price = $('#max_price').val();
+            var min_stock = $('#min_stock').val();
+            var max_stock = $('#max_stock').val();
         
         $.ajax({
             type: "GET",
@@ -41,6 +41,7 @@ $(document).ready(function() {
 });
 
 
+
 // 削除処理
 $(document).ready(function() {
     $("#delete-button").on('click', function(event) {
@@ -52,7 +53,7 @@ $(document).ready(function() {
 
             var form = $(event.target);
             var id = form.find('button').data('id');
-            var url = "delete" + id;
+            var url = "delete/" + id;
 
         $.ajax({
             type: "POST",

@@ -33,7 +33,7 @@
         <input type="text" name="max_stock" id="max_stock" placeholder="上限在庫数">
     </div>
     
-        <button type="submit" class="btn btn-primary" id="search">{{ __('検索') }}</button>
+        <button type="submit" class="btn btn-primary search">{{ __('検索') }}</button>
         </form>
 
     <div id="text"></div>
@@ -78,8 +78,9 @@
             
             <form action="{{ route('delete', $product->id) }}" method="POST">
             @csrf
-                <td><input type="hidden" name="id" value="{{$product->id}}">
-                <button type="submit" class="btn btn-danger" id="delete-button" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button></td>
+                <td>
+                <input type="hidden" name="id" value="{{ $product->id }}">
+                <button type="submit" class="btn btn-danger delete-button" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button></td>
             </form>
             </tr>
             @endforeach
