@@ -1,4 +1,4 @@
-// 検索処理
+// 検索処理(非同期処理になっているが検索結果の表示が上手くいかない)
 $(document).ready(function() {
     $("#search").on('click', function(event) {
         event.preventDefault();
@@ -9,7 +9,7 @@ $(document).ready(function() {
 
             // 入力値の取得
             var keyword = $('#keyword').val();
-            var company_id = $('#company_id').val();
+            var company_id = $('#company_name').val();
             var min_price = $('#min_price').val();
             var max_price = $('#max_price').val();
             var min_stock = $('#min_stock').val();
@@ -31,8 +31,8 @@ $(document).ready(function() {
 
         }).done(function(data) {
             // 検索成功の時の処理
-            var extractedElement = $(data).find("#data_table");
-            $("#data_table").html(extractedElement);
+            var extractedElement = $(data).find(".product_table");
+            $(".product_table").html(extractedElement);
             // 検索失敗の時の処理
         }).fail(function() {
             alert('error');
@@ -42,7 +42,7 @@ $(document).ready(function() {
 
 
 
-// 削除処理
+// 削除処理(削除処理は上手くいくが、非同期処理がされていない)
 $(document).ready(function() {
     $("#delete-button").on('click', function(event) {
         event.preventDefault();
@@ -53,7 +53,7 @@ $(document).ready(function() {
 
             var form = $(event.target);
             var id = form.find('button').data('id');
-            var url = "delete/" + id;
+            var url = "delete" + id;
 
         $.ajax({
             type: "POST",

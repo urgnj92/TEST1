@@ -15,10 +15,10 @@
     </div>
 
     <div class="search_company">
-        <select class="form-select" name="company_id" id="company_id" value="{{ ('company_id') }}">
+        <select class="form-select" name="company_id" id="company_name" value="{{ ('company_id') }}">
             <option>{{ __('メーカー名を選択してください') }}</option>
-            @foreach ($products as $product)
-                <option value="{{ $product->id }}">{{ $product->company_name }}</option>
+            @foreach ($companies as $company)
+                <option value="{{ $company->id }}">{{ $company->company_name }}</option>
             @endforeach
         </select>
     </div>
@@ -33,7 +33,7 @@
         <input type="text" name="max_stock" id="max_stock" placeholder="上限在庫数">
     </div>
     
-        <button type="submit" class="btn btn-primary search">{{ __('検索') }}</button>
+        <button type="submit" class="btn btn-primary" id="search">{{ __('検索') }}</button>
         </form>
 
     <div id="text"></div>
@@ -44,29 +44,34 @@
         <button type="button" class="btn btn-primary" onclick="location.href=('create')">{{ __('新規登録') }}</button>
     </div>
 
-    <table id="sortable" class="products-table">
+    <table id="sortable-table" class="products-table">
         <thread>
         <tr>
-            <th scope="col">@sortablelink('id','ID')</th>
-            <th scope="col">@sortablelink('img_path','商品画像')</th>
-            <th scope="col">@sortablelink('product_name', '商品名')</th>
-            <th scope="col">@sortablelink('price','価格')</th>
-            <th scope="col">@sortablelink('stock','在庫数')</th>
-            <th scope="col">@sortablelink('company_name','メーカー名')</th>
-            <th scope="col">@sortablelink('created_at','作成日')</th>
-            <th scope="col">@sortablelink('updated_at','更新日')</th>
-
+            <th>@sortablelink('id','ID')</th>
+            <th>商品画像</th>
+            <th>@sortablelink('product_name', '商品名')</th>
+            <th>@sortablelink('price','価格')</th>
+            <th>@sortablelink('stock','在庫数')</th>
+            <th>@sortablelink('company_name','メーカー名')</th>
+            <th>@sortablelink('created_at','作成日')</th>
+            <th>@sortablelink('updated_at','更新日')</th>
             <th>詳細</th>
             <th>削除</th>
         </tr>
         </thread>
 
-        <tbody>
+        <tbody class="product_table">
             @foreach ($products as $product)
-            
-            <tr id="data_table">
+            <tr name="table" id="data_table">
+                
                 <td>{{ $product->id }}</td>
-                <td>{{ $product->img_path }}</td>
+                <td>
+                    @if ($product->img_path)
+                        <img src="{{ asset($product->img_path) }}" alt="Product Image" style="max-width: 100px;">
+                    @else
+                        No Image
+                    @endif
+                </td>
                 <td>{{ $product->product_name }}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->stock }}</td>
@@ -80,11 +85,10 @@
             @csrf
                 <td>
                 <input type="hidden" name="id" value="{{ $product->id }}">
-                <button type="submit" class="btn btn-danger delete-button" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button></td>
+                <button type="submit" class="btn btn-danger" id="delete-button" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button></td>
             </form>
             </tr>
             @endforeach
-
         </tbody>
     </table>
 

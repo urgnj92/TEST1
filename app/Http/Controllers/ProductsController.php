@@ -28,17 +28,17 @@ class ProductsController extends Controller
 
         // 入力された情報の取得
         $keyword = $request->input('keyword');
-        $company_name = $request->input('company_name');
+        $company_id = $request->input('company_id');
         $min_price = $request->input('min_price');
         $max_price = $request->input('max_price');
         $min_stock = $request->input('min_stock');
         $max_stock = $request->input('max_stock');
         // productsテーブルから入力された情報をもとにデータを取得
-        $products = $model->searchProducts($keyword, $company_name, $min_price, $max_price, $min_stock, $max_stock);
+        $products = $model->searchProducts($keyword, $company_id, $min_price, $max_price, $min_stock, $max_stock);
         // companiesテーブルから情報を取得
         $companies = $model->getCompanyNameById();
 
-        return view('products.index', compact('products', 'keyword', 'company_name', 'min_price', 'max_price', 'min_stock', 'max_stock'));
+        return view('products.index', compact('products', 'companies', 'keyword'));
     }
 
     /**
@@ -51,9 +51,10 @@ class ProductsController extends Controller
     public function create() {
         // インスタンス生成
         $model = new Company();
+        
         // companiesテーブルからデータを取得
-        $company = $model->getCompanyNameById();
-        return view('products.create', ['companies' => $company]);
+        $companies = $model->getCompanyNameById();
+        return view('products.create', ['companies' => $companies]);
     }
 
     /**
@@ -73,6 +74,7 @@ class ProductsController extends Controller
             // 登録処理呼び出し
             $model = new Products();
             $model->getProduct($request);
+            
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

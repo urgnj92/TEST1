@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->integer('price');
             $table->integer('stock');
             $table->longText('comment');
-            $table->longText('img_path')->nullable();
+            $table->string('img_path');
             $table->dateTime('created_at');
             $table->dateTime('updated_at');
         });

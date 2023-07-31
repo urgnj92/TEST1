@@ -56,14 +56,14 @@ class Products extends Model
     public function searchProducts($keyword, $company_name, $min_price, $max_price, $min_stock, $max_stock) {
         $products = Products::sortable('products')
                 ->join('companies', 'company_id', '=', 'companies.id')
-                ->select('products.*','companies.company_name', 'products.price', 'products.stock')
+                ->select('products.*','companies.company_name')
 
                 ->where(function ($query) use ($keyword) {
-                    $query->where('products.product_name', 'LIKE', "%$keyword%")
-                        ->orWhere('companies.company_name', 'LIKE', "%$keyword%");
+                    $query->where('products.product_name', 'LIKE', "%$keyword%");
+                        // ->orWhere('companies.company_name', 'LIKE', "%$keyword%");
                 })
                 ->when($company_name, function ($query, $company_name) {
-                    return $query->where('companies.company_name');
+                    return $query->where('products.company_id', $company_name);
                 })
                 ->when($min_price, function ($query, $min_price) {
                     return $query->where('products.price', '>', $min_price);
