@@ -86,18 +86,22 @@ class Products extends Model
 
     // 登録処理
     public function getProduct($data) {
+        // dd($data);
         DB::table('products') -> insert([
-            'company_id' => $data -> company_id,
-            'product_name' => $data -> product_name,
-            'price' => $data -> price,
-            'stock' => $data -> stock,
-            'comment' => $data -> comment,
+            'company_id' => $data -> input('company_id'),
+            'product_name' => $data -> input('product_name'),
+            'price' => $data -> input('price'),
+            'stock' => $data -> input('stock'),
+            'comment' => $data -> input('comment'),
             'img_path' => $data -> img_path,
             'created_at' => now(),
             'updated_at' => now(),
         ]); 
 
     }
+
+    
+
 
     // 詳細表示
     public function getDetail($id) {
@@ -132,9 +136,6 @@ class Products extends Model
         }
         return false;
     }
-
-    
-
 
 }
 

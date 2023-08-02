@@ -1,4 +1,4 @@
-// 検索処理(非同期処理になっているが検索結果の表示が上手くいかない)
+// 検索処理
 $(document).ready(function() {
     $("#search").on('click', function(event) {
         event.preventDefault();
@@ -17,7 +17,7 @@ $(document).ready(function() {
         
         $.ajax({
             type: "GET",
-            url: 'index.php',
+            url: 'index',
             data: {
                 keyword: keyword,
                 company_id: company_id,
@@ -42,9 +42,9 @@ $(document).ready(function() {
 
 
 
-// 削除処理(削除処理は上手くいくが、非同期処理がされていない)
+// 削除処理(非同期処理がされたが、削除処理がされない)
 $(document).ready(function() {
-    $("#delete-button").on('click', function(event) {
+    $(".btn.btn-danger").on('click', function(event) {
         event.preventDefault();
 
         $.ajaxSetup({
@@ -52,8 +52,9 @@ $(document).ready(function() {
         });
 
             var form = $(event.target);
-            var id = form.find('button').data('id');
-            var url = "delete" + id;
+            var id = form.data('id');
+            var url = "delete/" + id;
+            console.log("ID: " + id);
 
         $.ajax({
             type: "POST",

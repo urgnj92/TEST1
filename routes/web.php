@@ -31,6 +31,7 @@ Route::post('/delete/{id}',[App\Http\Controllers\ProductsController::class, 'del
 Route::get('/create',[App\Http\Controllers\ProductsController::class, 'create'])->name('create');
 Route::post('/create',[App\Http\Controllers\ProductsController::class, 'store'])->name('store');
 
+
 // 商品情報詳細画面
 Route::get('/show/{id}',[App\Http\Controllers\ProductsController::class, 'show'])->name('show');
 

@@ -7,7 +7,7 @@
 </div>
 
 <div class="body">
-    <form action="{{ route('store') }}" method="POST">
+    <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
     @csrf
         
         <div class="form-group">
@@ -47,7 +47,7 @@
         
         <div class="form-group">
             <label for="img_path">商品画像</label>
-            <input type="file" class="form_control" name="img_path" id="img_path">
+            <input type="file" class="form_control" name="img" id="img">
         </div>
 
         <button type="submit" class="btn btn-primary">{{ __('登録') }}</button>

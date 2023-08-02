@@ -85,7 +85,7 @@
             @csrf
                 <td>
                 <input type="hidden" name="id" value="{{ $product->id }}">
-                <button type="submit" class="btn btn-danger" id="delete-button" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button></td>
+                <button type="button" class="btn btn-danger" data-id="{{ $product->id }}" onclick='return confirm("削除しますか？");'>{{ __('削除') }}</button></td>
             </form>
             </tr>
             @endforeach

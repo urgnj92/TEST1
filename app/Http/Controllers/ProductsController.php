@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\storage;
+use Illuminate\Support\Str;
 use App\Models\Products;
 use App\Models\Company;
 use App\Http\Requests\ProductsRequest;
@@ -74,15 +76,30 @@ class ProductsController extends Controller
             // 登録処理呼び出し
             $model = new Products();
             $model->getProduct($request);
+            // 画像の保存(追加した内容)
+            if ($request->hasFile('img')) {
+                $dir = 'img';
+                $image = $request->file('img');
+                // dd($uploadedFile);
+                $extension = $image->getClientOriginalExtension();
+                $originalFileName = $image->getClientOriginalName();
+                $filename = $originalFileName. '.' . $extension;
+                $image->storeAs($dir, $filename);
+
+                $model->img_path = $dir . '/' . $filename;
+                $model->save();
+            }
             
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
             return back();
         }
-
+        
         return redirect(route('index'));
     }
+    
+
 
     /**
      * Display the specified resource.
