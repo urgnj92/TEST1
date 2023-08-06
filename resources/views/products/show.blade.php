@@ -9,7 +9,13 @@
     <div class="body">
         <div class="products_detail">{{ $products->id }}</div>
         
-        <div class="products_detail">{{ $products->img_path }}</div>
+        <div class="products_detail">
+        @if ($products->img_path)
+                        <img src="{{ asset($products->img_path) }}" alt="Product Image" style="max-width: 100px;">
+                    @else
+                        No Image
+                    @endif
+                </div>
 
         <div class="products_detail">{{ $products->product_name }}</div>
 

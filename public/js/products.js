@@ -31,8 +31,8 @@ $(document).ready(function() {
 
         }).done(function(data) {
             // 検索成功の時の処理
-            var extractedElement = $(data).find(".product_table");
-            $(".product_table").html(extractedElement);
+            var extractedElement = $(data).find("#sortable-table");
+            $("#sortable-table").html(extractedElement);
             // 検索失敗の時の処理
         }).fail(function() {
             alert('error');
@@ -66,6 +66,10 @@ $(document).ready(function() {
         }).done(function(data) {
             // 通信が成功した時の処理
             console.log("success");
+            form.closest('tr').remove();
+            if($("#data_table").find().length === 0 ) {
+                $("#data_table");
+            }
 
         }).fail(function(xhr) {
             // 通信が失敗した時の処理

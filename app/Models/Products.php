@@ -85,22 +85,34 @@ class Products extends Model
 
 
     // 登録処理
-    public function getProduct($data) {
-        // dd($data);
+    public function getProduct($request) {
+        // 画像の保存
+        $dir = 'img';
+        $img_path = null;
+
+        if ($request->hasFile('img')) {
+            $image = $request->file('img');
+            $extension = $image->getClientOriginalExtension();
+            $originalFileName = $image->getClientOriginalName();
+            $filename = $originalFileName. '.' . $extension;
+            $image->storeAs($dir, $filename);
+
+            $img_path = $dir . '/' . $filename;
+
+        }
+        
         DB::table('products') -> insert([
-            'company_id' => $data -> input('company_id'),
-            'product_name' => $data -> input('product_name'),
-            'price' => $data -> input('price'),
-            'stock' => $data -> input('stock'),
-            'comment' => $data -> input('comment'),
-            'img_path' => $data -> img_path,
+            'company_id' => $request -> input('company_id'),
+            'product_name' => $request -> input('product_name'),
+            'price' => $request -> input('price'),
+            'stock' => $request -> input('stock'),
+            'comment' => $request -> input('comment'),
+            'img_path' => $img_path,
             'created_at' => now(),
             'updated_at' => now(),
         ]); 
 
     }
-
-    
 
 
     // 詳細表示
