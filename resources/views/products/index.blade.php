@@ -67,7 +67,7 @@
                 <td>{{ $product->id }}</td>
                 <td>
                     @if ($product->img_path)
-                        <img src="{{ asset($product->img_path) }}" alt="Product Image" style="max-width: 100px;">
+                        <img src="{{ asset('storage/public/'. $product->img_path) }}" alt="Product Image" style="max-width: 100px;">
                     @else
                         No Image
                     @endif

@@ -95,7 +95,7 @@ class Products extends Model
             $extension = $image->getClientOriginalExtension();
             $originalFileName = $image->getClientOriginalName();
             $filename = $originalFileName. '.' . $extension;
-            $image->storeAs($dir, $filename);
+            $image->storeAs('public/' . $dir, $filename);
 
             $img_path = $dir . '/' . $filename;
 
