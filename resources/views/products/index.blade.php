@@ -15,9 +15,19 @@
     </div>
 
     <div class="search_company">
-        <select class="form-select" name="company_id" id="company_name" value="{{ ('company_id') }}">
-            <option>{{ __('メーカー名を選択してください') }}</option>
+        <select class="form-select" name="company_id" id="company_name">
+            <option value="">{{ __('メーカー名を選択してください') }}</option>
             @foreach ($companies as $company)
+                <option value="{{ $company->id }}">{{ $company->company_name }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="company_name">メーカー</label>
+        <select class="form-control" id="company_name" name="company_id">
+            <option value="">{{"メーカーを選択してください"}}</option>
+            @foreach($companies as $company)
                 <option value="{{ $company->id }}">{{ $company->company_name }}</option>
             @endforeach
         </select>
