@@ -1,7 +1,15 @@
 {
     "cSpell.words": [
+<<<<<<< HEAD
         "endsection",
         "productapp",
         "productsapp"
+=======
+        "endguest",
+        "endsection",
+        "gstatic",
+        "productsapp",
+        "sortablelink"
+>>>>>>> 31643ae4ffb933363438e1d02e8345f66cf91365
     ]
 }

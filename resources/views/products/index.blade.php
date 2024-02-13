@@ -34,6 +34,7 @@
             </dl>
         </section>
 
+<<<<<<< HEAD
         <section id="body" class="wrapper">
             <h3 class="section-title">商品情報一覧</h2>
                 <button type="button" class="btn btn-primary" onclick="location.href=('create')">{{ __('新規登録') }}</button>
@@ -53,6 +54,22 @@
                     <th>削除</th>
                 </tr>
                 </thread>
+=======
+    <!-- <div class="form-group">
+        <label for="company_name">メーカー</label>
+        <select class="form-control" id="company_name" name="company_id">
+            <option value="">{{"メーカーを選択してください"}}</option>
+            @foreach($companies as $company)
+                <option value="{{ $company->id }}">{{ $company->company_name }}</option>
+            @endforeach
+        </select>
+    </div>
+-->
+    <div class="search_price">
+        <input type="text" name="min_price" id="min_price" placeholder="下限価格">
+        <input type="text" name="max_price" id="max_price" placeholder="上限価格">
+    </div>
+>>>>>>> 31643ae4ffb933363438e1d02e8345f66cf91365
 
                 <tbody class="product_table">
                     @foreach ($products as $product)
