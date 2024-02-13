@@ -23,7 +23,7 @@
         </select>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="company_name">メーカー</label>
         <select class="form-control" id="company_name" name="company_id">
             <option value="">{{"メーカーを選択してください"}}</option>
@@ -32,7 +32,7 @@
             @endforeach
         </select>
     </div>
-
+-->
     <div class="search_price">
         <input type="text" name="min_price" id="min_price" placeholder="下限価格">
         <input type="text" name="max_price" id="max_price" placeholder="上限価格">
