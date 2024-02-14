@@ -2,8 +2,8 @@
 
 
 @section('content')
+<div class="container">
     <h2 class="title">商品情報詳細</h2>
-    <main>
         <div id="body"class="wrapper">
             <section id="body" class="wrapper">
                 <p>{{ $products->id }}</p>
@@ -17,6 +17,6 @@
                 <button type="button" class="btn btn-primary" onclick="history.back()">{{ __('戻る') }}</button>
             </section>
         </div>
-    </main>
+</div>
 @endsection
 

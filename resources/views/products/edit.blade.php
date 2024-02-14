@@ -1,10 +1,9 @@
 @extends('productsapp')
 @section('content')
 <form action="{{ route('update',$products->id) }}" method="POST">
-    @csrf
+@csrf
+<div class="container">
     <h2 class="title">商品情報編集</h2>
-
-    <main>
         <div id="body" class="wrapper">
             <section id="products_detail">
                     <p><input type="text" name="id" value="{{ $products->id }}"  placeholder="商品情報ID"></p>
@@ -24,6 +23,6 @@
                 <button type="button" class="btn btn-primary" onclick="history.back()">{{ __('戻る') }}</button>
             </section>
         </div>
-    </main>
+</div>
 </form>
 @endsection

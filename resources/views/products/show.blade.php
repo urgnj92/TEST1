@@ -1,8 +1,7 @@
 @extends('productsapp')
 @section('content')
-    <h2 class="title">商品情報詳細</h1>
-
-    <main>
+<div class="container">
+    <h2 class="title">商品情報詳細</h2>
         <div id="body"class="wrapper">
             <section id="products_detail">
                 <p>{{ $products->id }}</p>
@@ -22,6 +21,6 @@
                 <button type="button" class="btn btn-primary" onclick="history.back()">{{ __('戻る') }}</button>
             </section>
         </div>
-    </main>
+</div>
 @endsection
 

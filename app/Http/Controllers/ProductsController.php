@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 use App\Models\Products;
 use App\Models\Company;
 use App\Http\Requests\ProductsRequest;
+use Carbon\Carbon;
+
 
 class ProductsController extends Controller
 {
@@ -97,13 +99,32 @@ class ProductsController extends Controller
      */
     
     // 詳細画面表示
-    public function show($id) {
+    public function show(Request $request, $id) {
         // インスタンス生成
         $model = new Products();
         // productテーブルからデータを取得
         $products = $model->getDetail($id);
+        foreach ($products as $product) {
+            $product->created_at = Carbon::parse($product->created_at);
+            $product->updated_at = Carbon::parse($product->updated_at);
+        }
         return view('products.show', compact('products'));
     }
+
+// // お知らせ一覧
+// public function show(Request $request)
+// {
+//     // インスタンス生成
+//     $model = new Article;
+//     $articles = $model->articlesGetList();
+//     // $articles内の各記事のposted_dateをCarbonのインスタンスに変換
+//     foreach ($articles as $article) {
+//         $article->posted_date = Carbon::parse($article->posted_date);
+//     }
+
+//     return view('notice', compact('articles'));
+// }
+
 
     /**
      * Show the form for editing the specified resource.

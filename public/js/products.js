@@ -42,7 +42,7 @@ $(document).ready(function() {
 
 
 
-// 削除処理(非同期処理がされたが、削除処理がされない)
+// 削除処理
 $(document).ready(function() {
     $(".btn.btn-danger").on('click', function(event) {
         event.preventDefault();
