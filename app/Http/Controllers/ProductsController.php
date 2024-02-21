@@ -111,20 +111,6 @@ class ProductsController extends Controller
         return view('products.show', compact('products'));
     }
 
-// // お知らせ一覧
-// public function show(Request $request)
-// {
-//     // インスタンス生成
-//     $model = new Article;
-//     $articles = $model->articlesGetList();
-//     // $articles内の各記事のposted_dateをCarbonのインスタンスに変換
-//     foreach ($articles as $article) {
-//         $article->posted_date = Carbon::parse($article->posted_date);
-//     }
-
-//     return view('notice', compact('articles'));
-// }
-
 
     /**
      * Show the form for editing the specified resource.
